@@ -1,0 +1,60 @@
+# Wake word detection configuration
+wake_word:
+  porcupine:
+    access_key: "${PICOVOICE_ACCESS_KEY}"  # Your Picovoice access key
+    keywords: ["hey computer"]  # Custom wake words
+    sensitivities: [0.5]  # Wake word detection sensitivity (0.0-1.0)
+  vad:
+    aggressiveness: 3  # VAD aggressiveness (0-3)
+    sample_rate: 16000  # Audio sample rate
+    frame_duration_ms: 30  # Frame duration in milliseconds
+    speech_pad_ms: 300  # Padding time for speech detection
+    min_speech_duration_ms: 250  # Minimum speech duration
+
+# Text-to-Speech configuration
+tts:
+  type: "edge"  # TTS engine type: "edge" or "openai"
+  # Edge TTS settings
+  edge:
+    voice: "zh-CN-XiaoxiaoNeural"
+    rate: "+25%"  # Speech rate, e.g., "+50%", "-20%"
+    volume: "+0%"  # Volume, e.g., "+50%", "-20%"
+    pitch: "+0Hz"  # Pitch, e.g., "+10Hz", "-10Hz"
+  # OpenAI TTS settings
+  openai:
+    voice: "zh-CN-XiaoxiaoNeural"
+    api_key: "your_api_key_here"
+    api_base: "http://localhost:5050/v1"
+
+# Speech-to-Text configuration
+stt:
+  type: "whisper"  # STT engine type: "edge" or "whisper"
+  # Whisper API settings
+  whisper:
+    model: "whisper-1"
+    api_key: "${OPENAI_API_KEY}"
+    api_base: "${OPENAI_API_BASE}"
+  # Edge STT settings
+  edge:
+    language: "zh-CN"
+
+# LLM configuration
+llm:
+  type: "openai"  # LLM provider
+  model: "gpt-3.5-turbo"  # Model selection
+  api_base: "https://api.openai.com/v1"  # API endpoint
+  temperature: 0.7  # Response temperature
+  max_tokens: 150  # Maximum tokens per response
+  api_key: "${OPENAI_API_KEY}"  # Your OpenAI API key
+
+# Audio configuration
+audio:
+  input_device: -1  # Audio input device (-1 for default)
+  output_device: -1  # Audio output device (-1 for default)
+  sample_rate: 16000  # Audio sample rate
+  channels: 1  # Number of audio channels
+
+# Logging configuration
+logging:
+  level: "INFO"  # Logging level
+  file: "home_ai.log"  # Log file path
